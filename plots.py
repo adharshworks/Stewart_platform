@@ -89,3 +89,34 @@ def plot_scalar(time, data, title, ylabel):
     plt.tight_layout()
 
     plt.show()
+def plot_overlay(time,
+                 data1,
+                 data2,
+                 data3,
+                 label1,
+                 label2,
+                 label3,
+                 title,
+                 ylabel):
+
+    import matplotlib.pyplot as plt
+
+    plt.figure(figsize=(10,6))
+
+    plt.plot(time, data1, linewidth=2, label=label1)
+    plt.plot(time, data2, linewidth=2, label=label2)
+    plt.plot(time, data3, linewidth=2, label=label3)
+
+    plt.title(title)
+
+    plt.xlabel("Time (s)")
+
+    plt.ylabel(ylabel)
+
+    plt.grid(True)
+
+    plt.legend()
+
+    plt.tight_layout()
+
+    plt.show()

@@ -1,28 +1,56 @@
 from geometry import StewartPlatform
-from trajectory import straight_line,cubic,bezier
+from trajectory import straight_line, cubic, bezier
 from simulation import run_simulation
 from visualize import animate
-from plots import print_results, plot_results,plot_scalar
+from plots import print_results, plot_results, plot_scalar
+from export import export_results
 
+# Create robot
 robot = StewartPlatform()
 
-start = [0,0,robot.height,0,0,0]
+# Start and End Pose
+start = [0, 0, robot.height, 0, 0, 0]
+end = [50, 30, robot.height, 30, 60, 10]
 
-end = [50,30,robot.height,30,60,10]
+# ----------------------------------------------------
+# Choose ONE trajectory
+# ----------------------------------------------------
+
+# trajectory, time = straight_line(
+#     start,
+#     end,
+#     duration=1.0,
+#     num_points=100
+# )
+
+# trajectory, time = cubic(
+#     start,
+#     end,
+#     duration=1.0,
+#     num_points=100
+# )
 
 trajectory, time = bezier(
     start,
     end,
     duration=1.0,
     num_points=100,
-    height=-50
+    height=200
 )
+
+# ----------------------------------------------------
+# Run Simulation
+# ----------------------------------------------------
 
 results = run_simulation(
     robot,
     trajectory,
     time
 )
+
+# ----------------------------------------------------
+# Print Results
+# ----------------------------------------------------
 
 print_results(
     trajectory,
@@ -31,9 +59,12 @@ print_results(
     results["acceleration"],
     results["stroke"],
     results["manipulability"],
-    results["condition_number"] 
-
+    results["condition_number"]
 )
+
+# ----------------------------------------------------
+# Plot Results
+# ----------------------------------------------------
 
 plot_results(
     time,
@@ -41,11 +72,12 @@ plot_results(
     results["velocity"],
     results["acceleration"]
 )
+
 plot_scalar(
     time,
     results["manipulability"],
     "Manipulability",
-    "w"
+    "Manipulability"
 )
 
 plot_scalar(
@@ -54,6 +86,21 @@ plot_scalar(
     "Condition Number",
     "Condition Number"
 )
+
+# ----------------------------------------------------
+# Export CSV
+# ----------------------------------------------------
+
+# export_results(
+#     "bezier2.csv",
+#     time,
+#     results
+# )
+
+# ----------------------------------------------------
+# Animate
+# ----------------------------------------------------
+
 animate(
     robot,
     trajectory
