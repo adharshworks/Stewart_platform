@@ -41,7 +41,8 @@ def transform_platform(robot,pose):
 
 def inverse_kinematics(robot,pose):
     platform_world=transform_platform(robot,pose)
-
-    leg_vectors=platform_world-robot.B
+    base_points=robot.B[robot.leg_pairing]
+    leg_vectors=platform_world-base_points
     lengths=np.linalg.norm(leg_vectors,axis=1)
+   
     return(lengths,leg_vectors,platform_world)

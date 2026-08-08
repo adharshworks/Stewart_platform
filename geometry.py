@@ -5,8 +5,10 @@ class StewartPlatform:
         self.base_radius=250.0
         self.platform_radius=150.0
         self.height=450.0
-        base_angles_deg=np.array([15,45,135,165,255,285])
-        platform_angles_deg=np.array([75,105,195,225,315,345])
+        base_angles_deg=np.array([10,50,130,170,250,290])
+        platform_angles_deg=np.array([70,110,190,230,310,350])
+
+        self.leg_pairing = np.array([1,0,3,2,5,4])
 
         self.base_angles=np.deg2rad(base_angles_deg)
         self.platform_angles=np.deg2rad(platform_angles_deg)

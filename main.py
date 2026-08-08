@@ -4,6 +4,8 @@ from simulation import run_simulation
 from visualize import animate
 from plots import print_results, plot_results, plot_scalar
 from export import export_results
+from diag import check_jacobian
+
 
 # Create robot
 robot = StewartPlatform()
@@ -23,20 +25,20 @@ end = [50, 30, robot.height, 30, 60, 10]
 #     num_points=100
 # )
 
-# trajectory, time = cubic(
-#     start,
-#     end,
-#     duration=1.0,
-#     num_points=100
-# )
-
-trajectory, time = bezier(
+trajectory, time = cubic(
     start,
     end,
     duration=1.0,
-    num_points=100,
-    height=200
+    num_points=100
 )
+
+# trajectory, time = bezier(
+#     start,
+#     end,
+#     duration=1.0,
+#     num_points=100,
+#     height=150
+# )
 
 # ----------------------------------------------------
 # Run Simulation
@@ -91,11 +93,11 @@ plot_scalar(
 # Export CSV
 # ----------------------------------------------------
 
-# export_results(
-#     "bezier2.csv",
-#     time,
-#     results
-# )
+export_results(
+    "cubic.csv",
+    time,
+    results
+)
 
 # ----------------------------------------------------
 # Animate
@@ -105,3 +107,4 @@ animate(
     robot,
     trajectory
 )
+#check_jacobian(robot, start)

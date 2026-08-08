@@ -37,6 +37,7 @@ def compute_jacobian(robot,
 
     # Jacobian
     J = np.zeros((6, 6))
+    Lc=robot.platform_radius
 
     for i in range(robot.num_legs):
 
@@ -44,9 +45,10 @@ def compute_jacobian(robot,
         J[i, :3] = unit_vectors[i]
 
         # Rotational part
+        
         J[i, 3:] = np.cross(
             r[i],
             unit_vectors[i]
-        )
+        )/Lc
 
     return J
